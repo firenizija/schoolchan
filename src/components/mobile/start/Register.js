@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const Register = () => {
-    const [userName, setUserName] = useState('');
-    const [school, setSchool] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const data = { userName, school, email, password };
+    const [username, setusername] = useState('anonim');
+    const [school, setSchool] = useState('xx');
+    const [email, setEmail] = useState('xx@wp.pl');
+    const [password, setPassword] = useState('aaa');
+    const data = { username, school, email, password };
 
     const handleSubmit = e => {
-
-        fetch('http://192.168.8.30:5000/singup', {
+        fetch('http://192.168.8.30:5000/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,6 +22,7 @@ const Register = () => {
             .catch((error) => {
                 console.error('Error:', error);
             });
+
         e.preventDefault();
     }
 
@@ -33,10 +32,10 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="userName"
+                    name="username"
                     placeholder="Pseudonim"
-                    value={userName}
-                    onChange={e => setUserName(e.target.value)}
+                    value={username}
+                    onChange={e => setusername(e.target.value)}
                 />
                 <input
                     type="text"

@@ -10,6 +10,7 @@ const Start = () => {
             </div>
             <hr />
             <Register />
+            <Login />
         </div>
     );
 }
