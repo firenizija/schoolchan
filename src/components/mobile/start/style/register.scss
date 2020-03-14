@@ -1,0 +1,46 @@
+@import './mixin.scss';
+.register{
+    display:flex;
+    flex-direction: column;
+    width: 85%;
+    height: 100%;
+    &__title{
+        @include title;
+    }
+    &__text{
+        font-size: 1.2em;
+        width: 60%;
+        color:gray;
+        font-weight: 200;
+        margin: 20px 0
+    }
+    &__form{
+        @include form;
+    }    
+    &__input{
+        @include input;
+    }
+    &__buttons{
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    & p{
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+    &__loginButton{
+        border:none;
+        background: none;
+    }
+    &__loginText{
+        color:gray;
+    }
+    &__loginTextBlue{
+        color:#3D76FF;
+    }
+    &__registerButton{
+        @include submit;
+    }
+}

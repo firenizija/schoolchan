@@ -1,0 +1,19 @@
+.start{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 70vh;
+    margin:10vh 0;
+    &__bannerText{
+        font-size: 2.1em;
+        width: 66%;
+        text-align: center;
+    }
+    &__hr{
+        width: 66%;
+        height: 1.5px;
+        border:none;
+        background-image: linear-gradient(to right, #2979FF, #8D5CFF, #FB3CFF);
+        margin: 2em;
+    }
+}

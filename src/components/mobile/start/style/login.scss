@@ -1,0 +1,48 @@
+@import './mixin.scss';
+.login{
+    display:flex;
+    flex-direction: column;
+    width: 85%;
+    height: 100%;
+    &__title{
+        @include title;
+    }
+    &__form{
+        margin: 50px 0;
+        @include form;
+    }
+    &__input{
+        @include input;
+    }
+    &__underInputs{
+        display: flex;
+        justify-content: space-between;
+        margin: 2em 0;
+    }
+    &__forgotPassword{
+        background: none;
+        border: none;
+        color:gray;
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+    &__remember{
+        font-size: 1.2em;
+    }
+    &__rememberCheckbox{
+        margin: 0 10px;
+    }
+    &__loginButton{
+        @include submit;
+        margin: 0 auto;
+    }
+    &__registerButton{
+        background: none;
+        border: none;
+        color:#3D76FF;
+        font-weight: 700;
+        font-size: 1.2em;
+        margin: 1em auto;
+        padding: 1em;
+    }
+}
