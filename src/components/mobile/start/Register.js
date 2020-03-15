@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import './style/register.scss'
 import arrow from './svg/arrow.svg'
@@ -20,6 +20,26 @@ const Register = ({ switchFormState }) => {
             setError("Wpisz hasło");
             setErrorName("password");
         }
+        else if (name === "PasswordsDoNotMatch") {
+            setError("Podane hasła nie są takie same");
+            setErrorName("repassword");
+        }
+        else if (name === "UserExistsError") {
+            setError("Ten pseudonim juz jest zajęty");
+            setErrorName("username");
+        }
+        else if (name === "NoSchoolSelected") {
+            setError("Wybierz szkołę");
+            setErrorName("school");
+        }
+        else if (name === "AccountCreated") {
+            switchFormState("login")
+        }
+        else if (name) {
+            setError("Nieznany błąd");
+            setErrorName("repassword");
+        }
+        else switchFormState("login")
     }
 
     const data = { username, school, repassword, password };
@@ -64,7 +84,7 @@ const Register = ({ switchFormState }) => {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
-                {errorName === 'username' ? error : null}
+                <span className="register__error">{errorName === 'username' ? error : null}</span>
                 <select
                     name="school"
                     placeholder="Wybierz szkołe"
@@ -75,7 +95,7 @@ const Register = ({ switchFormState }) => {
                     <option value hidden>Wybierz szkołe</option>
                     <option value="kilińskiego">kilińskiego</option>
                 </select>
-                {errorName === 'school' ? error : null}
+                <span className="register__error">{errorName === 'school' ? error : null}</span>
                 <input
                     type="password"
                     name="password"
@@ -84,7 +104,7 @@ const Register = ({ switchFormState }) => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                {errorName === 'password' ? error : null}
+                <span className="register__error">{errorName === 'password' ? error : null}</span>
                 <input
                     type="password"
                     name="repassword"
@@ -93,7 +113,7 @@ const Register = ({ switchFormState }) => {
                     value={repassword}
                     onChange={e => setRepassword(e.target.value)}
                 />
-                {errorName === 'email' ? error : null}
+                <span className="register__error">{errorName === 'repassword' ? error : null}</span >
                 <div className="register__buttons">
                     <button
                         type="button"
@@ -111,8 +131,8 @@ const Register = ({ switchFormState }) => {
                         Zarejestruj się <img src={arrow} alt="" />
                     </button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 }
 

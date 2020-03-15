@@ -43,4 +43,7 @@
     &__registerButton{
         @include submit;
     }
+    &__error{
+        @include error;
+    }
 }
