@@ -1,0 +1,31 @@
+.topBar{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top:0;
+    width: 100%;
+    border-bottom: 1px solid rgba(121, 121, 121,0.3);
+    background-color: white;
+    padding: 10px 20px;
+    min-height: 50px;
+    &__optionsList{
+        display: flex;
+        flex:1;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__options{
+        &--banner{
+            font-weight: 700;
+            background: linear-gradient(to right,#2979FF, #8D5CFF, #FB3CFF);
+            background-clip: text;
+            color:transparent;
+            font-size: 1.2em;
+        }
+    }
+    &__button{
+        background: none;
+        border: none;
+    }
+}

@@ -94,6 +94,7 @@ const Register = ({ switchFormState }) => {
                 >
                     <option value hidden>Wybierz szkołe</option>
                     <option value="kilińskiego">kilińskiego</option>
+                    <option value="test">test</option>
                 </select>
                 <span className="register__error">{errorName === 'school' ? error : null}</span>
                 <input

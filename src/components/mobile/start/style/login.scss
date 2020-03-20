@@ -45,4 +45,7 @@
         margin: 1em auto;
         padding: 1em;
     }
+    &__error{
+        @include error;
+    }
 }

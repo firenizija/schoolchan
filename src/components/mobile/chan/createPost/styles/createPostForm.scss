@@ -1,0 +1,22 @@
+.createPostForm{
+    background-color: #EFF0F4;
+    border: 1px solid rgba(128, 128, 128, .4);
+    border-radius: 10px;
+    position: absolute;
+    width: 95%;
+    top:10%;
+    &__handle{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-bottom: 1px solid rgba(128, 128, 128, .4);
+    }
+    &__closeButton{
+        border:none;
+        background-color: transparent;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+    }
+}

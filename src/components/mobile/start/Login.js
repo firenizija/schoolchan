@@ -6,6 +6,20 @@ import arrow from './svg/arrow.svg'
 const Login = ({ switchFormState }) => {
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const errorController = (status) => {
+        if (status === 400) {
+            setError("Wpisz dane logowania");
+        } else if (status === 401) {
+            setError("Wpisane login lub hasło są nieprawidłowe");
+        } else if (status === 404 || status === 403) {
+            setError("Serwery aktualnie są niedostępne. Proszę spróbować ponownie później.");
+        } else if (status === 200) {
+            window.location.pathname = "/chan"
+        }
+    }
+
     const data = { username, password }
     const handleSubmit = (e) => {
         fetch('http://192.168.8.30:5000/api/auth/login', {
@@ -15,9 +29,9 @@ const Login = ({ switchFormState }) => {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((res) => { errorController(res.status); return (res.json()) })
             .then((data) => {
-                console.log('Success:', data.token);
+                console.log('Success:', data);
                 if (data.message) {
                     console.log("Złe dane");
                 } else {
@@ -25,7 +39,7 @@ const Login = ({ switchFormState }) => {
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                if (error == "TypeError: Failed to fetch") errorController(404)
             });
         e.preventDefault();
     }
@@ -49,6 +63,7 @@ const Login = ({ switchFormState }) => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
+                <span className="login__error">{error}</span>
                 <div className="login__underInputs">
                     <button className="login__forgotPassword">
                         Zapomniałeś hasła?
