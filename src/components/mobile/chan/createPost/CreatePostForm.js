@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import closeIco from './svg/closeIco.svg';
 import formIco from './svg/formIco.svg';
-import { useSelector, useDispatch } from 'react-redux'
-import { SetBody, SetImage } from 'redux/actions/index';
+import { useSelector } from 'react-redux'
 
 import './styles/createPostForm.scss'
 
 const CreatePostForm = ({ setCreatePostFrom }) => {
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
-    const dispatch = useDispatch();
     const socket = useSelector(state => state.socket)
 
     const sendPost = (e, data) => {

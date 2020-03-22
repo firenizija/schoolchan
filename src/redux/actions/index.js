@@ -10,26 +10,6 @@ export const SignOut = () => {
     }
 }
 
-export const SetBody = (text) => {
-    return {
-        type: 'SET_BODY',
-        payload: text
-    }
-}
-
-export const SetImage = (link) => {
-    return {
-        type: 'SET_IMAGE',
-        payload: link
-    }
-}
-
-export const ResetPost = () => {
-    return {
-        type: 'RESET_POST'
-    }
-}
-
 export const SetSocket = (socket) => {
     return {
         type: 'SET_SOCKET',

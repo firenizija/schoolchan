@@ -7,8 +7,6 @@ const Main = () => {
         <div>
             <TopBar />
             <Chan />
-            {/* Logged in */}
-            {/* <button onClick={() => localStorage.removeItem('token')}>Wyloguj</button> */}
         </div>
     );
 }

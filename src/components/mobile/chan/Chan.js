@@ -37,23 +37,17 @@ const Chan = () => {
             });
         });
 
-        socket.on('newPost', data => {
-            console.log(data)
-        })
-
         socket.on('connect_error', () => {
             console.log("Brak połączenia")
             dispatch(SignOut())
             window.location.pathname = ""
         });
 
-    }, [ENDPOINT, "kilińskiego"]);
+    }, [ENDPOINT]);
 
     return (
         <div className="chan">
-            <ul>
-                <Posts />
-            </ul>
+            <Posts />
             <CreatePost />
         </div>
     );

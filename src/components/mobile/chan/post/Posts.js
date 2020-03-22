@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Post from './Post'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Posts = () => {
     const socket = useSelector(state => state.socket)
@@ -14,14 +14,14 @@ const Posts = () => {
         })
     }
     return (
-        <li>
+        <ul>
             {posts.map((post, id) => (
                 <Post
                     key={id}
                     post={post}
                 />
             ))}
-        </li>
+        </ul>
     );
 }
 

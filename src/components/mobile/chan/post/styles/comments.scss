@@ -1,0 +1,48 @@
+.comments{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #FBFBFD;
+    z-index: 2;
+    &__topBar{
+        position: fixed;
+        display: flex;
+        align-items: center;
+        top:0;
+        width: 100%;
+        border-bottom: 1px solid rgba(121, 121, 121,0.3);
+        background-color: white;
+        padding: 10px 20px;
+        min-height: 50px;
+        max-height: 60px;
+    }
+    &__title{
+        margin: 0 1em;
+        font-size: 1.2em;
+    }
+    &__list{
+        margin-top: 65px;
+    }
+    &__commentForm{
+        position: fixed;
+        bottom: 0;
+        background-color: rgb(243, 243, 243);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        width: 90%;
+    }
+    &__imageInput{
+        display: none;
+    }
+    &__textInput{
+        flex:1;
+        margin: 5px 0;
+        resize: vertical;
+        border: none;
+        background-color: transparent;
+    }
+}

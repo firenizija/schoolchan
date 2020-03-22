@@ -5,7 +5,7 @@ import Login from './Login';
 import './style/start.scss'
 
 const Start = () => {
-    const [formState, switchFormState] = useState('register');
+    const [formState, switchFormState] = useState('login');
 
     return (
         <div className="start">
