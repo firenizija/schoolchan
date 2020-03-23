@@ -1,12 +1,14 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "homepage": "https://schoolchan.pl/",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "gh-pages": "^2.2.0",
     "is-mobile": "^2.2.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
@@ -18,6 +20,7 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

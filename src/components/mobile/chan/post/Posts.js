@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Post from './Post'
 import { useSelector } from 'react-redux'
 
+import './styles/posts.scss'
+
 const Posts = () => {
     const socket = useSelector(state => state.socket)
     const [posts, setPosts] = useState([])
@@ -14,7 +16,7 @@ const Posts = () => {
         })
     }
     return (
-        <ul>
+        <ul className="posts">
             {posts.map((post, id) => (
                 <Post
                     key={id}
