@@ -1,13 +1,13 @@
+image: node
 stages:
     - build
     - deploy
 build:
     stage: build
     script:
-        - yarn
         - echo "Building deploy package"
-        - yarn install
-        - yarn build
+        - npm install
+        - npm build
         - echo "Build successful"
     artifacts:
         expire_in: 1 hour
