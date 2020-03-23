@@ -4,6 +4,7 @@ stages:
 build:
     stage: build
     script:
+        - yarn
         - echo "Building deploy package"
         - yarn install
         - yarn build
@@ -14,9 +15,6 @@ build:
             - build
 deploy_production:
     stage: deploy
-    tags: 
-      - <tag you provided while registering the token>
-      - <second tag>
     script:
         - echo "Deploying to server"
         - cp -rv build/* /var/www/html/src/
