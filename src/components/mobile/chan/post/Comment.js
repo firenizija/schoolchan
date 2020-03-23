@@ -7,7 +7,7 @@ const Comment = ({ comment }) => {
         <li className="comment">
             <span className="comment__username">{comment.username}</span>
             &nbsp;{comment.commentText}&nbsp;
-            {comment.image ? <a href={comment.image.large} target="_blank">Obraz</a> : null}
+            {comment.image ? <a href={comment.image.large} rel="noopener noreferrer" target="_blank">Obraz</a> : null}
         </li>
     );
 }

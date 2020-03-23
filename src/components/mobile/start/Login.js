@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { SignIn } from 'redux/actions/index';
 
 import './style/login.scss'
-import arrow from './svg/arrow.svg'
+import arrow from 'svg/arrow.svg'
 
 const Login = ({ switchFormState }) => {
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const dispatch = useDispatch();
 
     const errorController = (status) => {
         if (status === 400) {
@@ -16,7 +19,7 @@ const Login = ({ switchFormState }) => {
         } else if (status === 404 || status === 403) {
             setError("Serwery aktualnie są niedostępne. Proszę spróbować ponownie później.");
         } else if (status === 200) {
-            window.location.pathname = "/chan"
+            // window.location.hash = "/chan"
         }
     }
 
@@ -35,10 +38,12 @@ const Login = ({ switchFormState }) => {
                 if (data.message) {
                     console.log("Złe dane");
                 } else {
-                    localStorage.setItem("token", data.token)
+                    localStorage.setItem("token", data.token);
+                    dispatch(SignIn());
                 }
             })
             .catch((error) => {
+                // eslint-disable-next-line
                 if (error == "TypeError: Failed to fetch") errorController(404)
             });
         e.preventDefault();

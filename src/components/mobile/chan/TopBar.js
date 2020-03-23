@@ -1,6 +1,6 @@
 import React from 'react';
-import chatIco from './svg/chatIco.svg'
-import userIco from './svg/userIco.svg'
+import chatIco from 'svg/chatIco.svg'
+import userIco from 'svg/userIco.svg'
 
 import './styles/topBar.scss'
 

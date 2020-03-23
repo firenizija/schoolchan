@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './style/register.scss'
-import arrow from './svg/arrow.svg'
+import arrow from 'svg/arrow.svg'
 
 const Register = ({ switchFormState }) => {
     const [username, setUsername] = useState('');

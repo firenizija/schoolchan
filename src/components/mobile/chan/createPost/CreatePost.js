@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Add from './svg/addIco.svg'
+import Add from 'svg/addIco.svg'
 import CreatePostForm from './CreatePostForm'
 
 import './styles/createPost.scss'

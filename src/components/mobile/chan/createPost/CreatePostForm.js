@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import closeIco from './svg/closeIco.svg';
-import formIco from './svg/formIco.svg';
+import closeIco from 'svg/closeIco.svg';
+import formIco from 'svg/formIco.svg';
 import { useSelector } from 'react-redux'
 
 import './styles/createPostForm.scss'
