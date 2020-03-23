@@ -17,7 +17,7 @@ deploy_production:
     stage: deploy
     script:
         - echo "Deploying to server"
-        - cp -rv build/* /var/www/html/src/
+        - cp -rv build/* /.
         - echo "Deployed"
     environment:
         name: production
