@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { SignOut, SetSocket } from 'redux/actions/index';
 import './styles/chan.scss'
 
-const ENDPOINT = 'http://192.168.8.30:5000/';
+const ENDPOINT = process.env.REACT_APP_API;
 const name = 'anonim';
 const room = 'room'
 const jwt = localStorage.getItem("token")

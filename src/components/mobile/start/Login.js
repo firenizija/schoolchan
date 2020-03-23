@@ -22,7 +22,7 @@ const Login = ({ switchFormState }) => {
 
     const data = { username, password }
     const handleSubmit = (e) => {
-        fetch('http://192.168.8.30:5000/api/auth/login', {
+        fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -45,7 +45,7 @@ const Register = ({ switchFormState }) => {
     const data = { username, school, repassword, password };
 
     const handleSubmit = e => {
-        fetch('http://192.168.8.30:5000/api/auth/register', {
+        fetch(`${process.env.REACT_APP_API}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
