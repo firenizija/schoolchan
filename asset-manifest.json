@@ -1,31 +1,34 @@
 {
   "files": {
-    "main.css": "/static/css/main.fe102798.chunk.css",
-    "main.js": "/static/js/main.88474a91.chunk.js",
-    "main.js.map": "/static/js/main.88474a91.chunk.js.map",
+    "main.css": "/static/css/main.ad3e9f22.chunk.css",
+    "main.js": "/static/js/main.ce7f4e7a.chunk.js",
+    "main.js.map": "/static/js/main.ce7f4e7a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ef76e641.js",
     "runtime-main.js.map": "/static/js/runtime-main.ef76e641.js.map",
-    "static/js/2.eeb3a8d5.chunk.js": "/static/js/2.eeb3a8d5.chunk.js",
-    "static/js/2.eeb3a8d5.chunk.js.map": "/static/js/2.eeb3a8d5.chunk.js.map",
+    "static/js/2.6981e848.chunk.js": "/static/js/2.6981e848.chunk.js",
+    "static/js/2.6981e848.chunk.js.map": "/static/js/2.6981e848.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1a7b89ad6daec36041aa83accec7b65a.js": "/precache-manifest.1a7b89ad6daec36041aa83accec7b65a.js",
+    "precache-manifest.18d6ae45a442898d4c1369769e3e4a33.js": "/precache-manifest.18d6ae45a442898d4c1369769e3e4a33.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.fe102798.chunk.css.map": "/static/css/main.fe102798.chunk.css.map",
-    "static/js/2.eeb3a8d5.chunk.js.LICENSE.txt": "/static/js/2.eeb3a8d5.chunk.js.LICENSE.txt",
+    "static/css/main.ad3e9f22.chunk.css.map": "/static/css/main.ad3e9f22.chunk.css.map",
+    "static/js/2.6981e848.chunk.js.LICENSE.txt": "/static/js/2.6981e848.chunk.js.LICENSE.txt",
     "static/media/addIco.svg": "/static/media/addIco.a83663f3.svg",
     "static/media/arrow.svg": "/static/media/arrow.1d027598.svg",
+    "static/media/backIco.svg": "/static/media/backIco.8bf6e5a8.svg",
     "static/media/chatIco.svg": "/static/media/chatIco.4195cd04.svg",
     "static/media/closeIco.svg": "/static/media/closeIco.6be77778.svg",
     "static/media/formIco.svg": "/static/media/formIco.db5ef68f.svg",
     "static/media/image_icon.svg": "/static/media/image_icon.eae12adf.svg",
     "static/media/racoon_male.svg": "/static/media/racoon_male.9eabe416.svg",
     "static/media/report.svg": "/static/media/report.b7a16ce7.svg",
+    "static/media/uploadImage.svg": "/static/media/uploadImage.af8867ce.svg",
+    "static/media/uploadImageDone.svg": "/static/media/uploadImageDone.3e48864c.svg",
     "static/media/userIco.svg": "/static/media/userIco.c95fa3fe.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ef76e641.js",
-    "static/js/2.eeb3a8d5.chunk.js",
-    "static/css/main.fe102798.chunk.css",
-    "static/js/main.88474a91.chunk.js"
+    "static/js/2.6981e848.chunk.js",
+    "static/css/main.ad3e9f22.chunk.css",
+    "static/js/main.ce7f4e7a.chunk.js"
   ]
 }
