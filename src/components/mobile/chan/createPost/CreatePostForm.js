@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
+import Draggable from 'react-draggable';
+
 import closeIco from 'svg/closeIco.svg';
 import formIco from 'svg/formIco.svg';
-import { useSelector } from 'react-redux'
+import uploadImageIco from 'svg/uploadImage.svg';
+import uploadImageDoneIco from 'svg/uploadImageDone.svg';
+// import uploadImageLoadingIco from 'svg/uploadImageLoading.svg';
 
 import './styles/createPostForm.scss'
 
@@ -15,6 +20,7 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
         const postData = { body, image }
         if (postData) {
             socket.emit('sendPost', postData);
+            setCreatePostFrom(false)
         }
     }
 
@@ -54,44 +60,60 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
     }
 
     return (
-        <div className="createPostForm">
-            <div className="createPostForm__handle">
-                <div>
-                    <img src={formIco} alt="createPost" />
-                    Utwórz post
+        <Draggable
+            axis="y"
+            handle=".createPostForm__handle"
+        >
+            <div className="createPostForm">
+                <div className="createPostForm__handle">
+                    <div>
+                        <img className="createPostForm__formIco" src={formIco} alt="createPost" />
+                        <span className="createPostForm__handleTitle">Utwórz post</span>
                     </div>
-                <button
-                    className="createPostForm__closeButton"
-                    onClick={() => setCreatePostFrom(false)}
-                >
-                    <img src={closeIco} alt="closeForm" />
-                </button>
-            </div>
-            <form action="" className="createPostForm__form">
-                Treść:
+                    <button
+                        className="createPostForm__closeButton"
+                        onClick={() => setCreatePostFrom(false)}
+                    >
+                        <img src={closeIco} alt="closeForm" />
+                    </button>
+                </div>
+                <form action="" className="createPostForm__form">
+                    <label className="createPostForm__label" htmlFor="body">
+                        Treść:
+                </label>
                     <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
-                    onChange={e => setBody(e.target.value)}
-                    value={body}
-                >
+                        name="body"
+                        className="createPostForm__commentBody"
+                        rows="8"
+                        placeholder="Nie ma to jak koronawirus x_x"
+                        onChange={e => setBody(e.target.value)}
+                        value={body}
+                    >
 
-                </textarea>
-                Obraz:
-                    <input
-                    type="file"
-                    id="file"
-                    onChange={() => uploadImage()}
-                />
-                <button
-                    onClick={(e) => sendPost(e)}
-                >
-                    Opublikuj
+                    </textarea>
+                    <label className="createPostForm__label" htmlFor="image">
+                        Obraz:
+                </label>
+                    <label>
+                        <img src={image === "" ? uploadImageIco : uploadImageDoneIco} alt="upload" className="createPostForm__uploadImg" />
+                        <input
+                            className="createPostForm__imageButton"
+                            name="image"
+                            type="file"
+                            accept="image/x-png,image/jpeg"
+                            id="file"
+                            onChange={() => uploadImage()}
+                        />
+                    </label>
+                    <button
+                        className="createPostForm__submit"
+                        onClick={(e) => sendPost(e)}
+                    >
+                        Opublikuj
                 </button>
-            </form>
-        </div>
+                </form>
+            </div>
+        </Draggable>
     );
 }
 

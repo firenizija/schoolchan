@@ -1,5 +1,16 @@
 .comment{
+    display: flex;
+    align-items: center;
+    margin: 1em 0;
+    &__text{
+        font-size: 1.2em;
+    }
+    &__sex{
+        margin-right: 1em;
+    }
     &__username{
-        
+        color:#4176FF;
+        font-size: 1.2em;
+        font-weight: 700;
     }
 }

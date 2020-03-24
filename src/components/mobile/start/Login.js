@@ -19,7 +19,6 @@ const Login = ({ switchFormState }) => {
         } else if (status === 404 || status === 403) {
             setError("Serwery aktualnie są niedostępne. Proszę spróbować ponownie później.");
         } else if (status === 200) {
-            // window.location.hash = "/chan"
         }
     }
 

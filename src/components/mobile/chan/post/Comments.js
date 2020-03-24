@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Comment from './Comment';
 import imageIcon from 'svg/image_icon.svg';
 import { useSelector } from 'react-redux';
+import backIco from 'svg/backIco.svg'
 // import uploadImage from 'api/uploadImage';
 
 import './styles/comments.scss';
@@ -20,10 +21,10 @@ const Comments = ({ post, setCommentsView }) => {
     useEffect(() => {
         if (socket) {
             socket.on('comments', data => {
-                setComments(data)
+                setComments(data);
             })
             socket.on("comment", (comment) => {
-                setComments([comment, ...comments])
+                setComments([comment, ...comments]);
             });
         }
     }, [comments, socket]);
@@ -32,6 +33,8 @@ const Comments = ({ post, setCommentsView }) => {
         e.preventDefault();
         const commentData = { image, commentText, postId: post._id };
         socket.emit("sendComment", commentData);
+        setCommentText("");
+        setImage("");
     }
 
     const uploadImage = (e) => {
@@ -53,17 +56,17 @@ const Comments = ({ post, setCommentsView }) => {
             fetch("https://api.imgbb.com/1/upload", requestOptions)
                 .then(res => res.json())
                 .then(res => {
-                    setImage({ large: res.data.image.url, mini: res.data.thumb.url, medium: res.data.medium.url })
+                    setImage({ large: res.data.image.url, mini: res.data.thumb.url, medium: res.data.medium.url });
                 })
                 .catch(error => console.log('error', error));
         }
 
-        var file = e.target.files[0]
+        var file = e.target.files[0];
         var reader = new FileReader();
 
         reader.onloadend = function () {
             var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-            sendImage(base64result)
+            sendImage(base64result);
         }
 
         if (file) {
@@ -77,7 +80,7 @@ const Comments = ({ post, setCommentsView }) => {
                 <button
                     onClick={() => setCommentsView(false)}
                 >
-                    ◀️
+                    <img src={backIco} alt="back" className="comments__backButtonImg" />
                 </button>
                 <div className="comments__title">Komentarze</div>
             </div>
@@ -102,7 +105,7 @@ const Comments = ({ post, setCommentsView }) => {
                     value={commentText}
                 >
                 </textarea>
-                <button onClick={e => sendComment(e)}>⌲</button>
+                <button className="comments__submit" onClick={e => sendComment(e)}>⌲</button>
             </form>
         </div>
     );
