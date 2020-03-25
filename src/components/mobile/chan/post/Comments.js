@@ -2,27 +2,28 @@ import React, { useState, useEffect } from 'react';
 import Comment from './Comment';
 import imageIcon from 'svg/image_icon.svg';
 import { useSelector } from 'react-redux';
-import backIco from 'svg/backIco.svg'
+import backIco from 'svg/backIco.svg';
+import autosize from 'autosize'
 // import uploadImage from 'api/uploadImage';
 
 import './styles/comments.scss';
 
-const Comments = ({ post, setCommentsView }) => {
+const Comments = ({ post, setCommentsView, focus, postComments }) => {
     const [image, setImage] = useState("");
     const [commentText, setCommentText] = useState("");
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState(postComments);
 
     const socket = useSelector(state => state.socket);
 
-    useEffect(() => {
-        socket.emit('showComments', post._id);
-    }, [socket, post._id]);
+    // useEffect(() => {
+    //     socket.emit('showComments', post._id);
+    // }, [socket, post._id]);
 
     useEffect(() => {
         if (socket) {
-            socket.on('comments', data => {
-                setComments(data);
-            })
+            // socket.on('comments', data => {
+            //     setComments(data);
+            // })
             socket.on("comment", (comment) => {
                 setComments([comment, ...comments]);
             });
@@ -56,7 +57,7 @@ const Comments = ({ post, setCommentsView }) => {
             fetch("https://api.imgbb.com/1/upload", requestOptions)
                 .then(res => res.json())
                 .then(res => {
-                    setImage({ large: res.data.image.url, mini: res.data.thumb.url, medium: res.data.medium.url });
+                    setImage({ large: res.data.image.url, mini: res.data.thumb.url });
                 })
                 .catch(error => console.log('error', error));
         }
@@ -73,6 +74,7 @@ const Comments = ({ post, setCommentsView }) => {
             reader.readAsDataURL(file);
         }
     }
+    autosize(document.querySelector('textarea'));
 
     return (
         <div className="comments">
@@ -97,6 +99,7 @@ const Comments = ({ post, setCommentsView }) => {
                     />
                 </label>
                 <textarea
+                    autoFocus={focus}
                     rows="1"
                     wrap="hard"
                     placeholder="Napisz komentarz..."

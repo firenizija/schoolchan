@@ -7,6 +7,7 @@ import './styles/posts.scss'
 const Posts = () => {
     const socket = useSelector(state => state.socket)
     const [posts, setPosts] = useState([])
+
     if (socket) {
         socket.on('posts', data => {
             setPosts(data)
@@ -19,7 +20,7 @@ const Posts = () => {
         <ul className="posts">
             {posts.map((post, id) => (
                 <Post
-                    key={id}
+                    key={post._id}
                     post={post}
                 />
             ))}

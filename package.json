@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "schoolchan",
   "homepage": "https://schoolchan.pl/",
   "version": "0.3.0",
   "private": true,
@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "autosize": "^4.0.2",
     "axios": "^0.19.2",
     "is-mobile": "^2.2.1",
     "node-sass": "^4.13.1",

@@ -22,10 +22,10 @@ const whenPosted = (createdAt) => {
         return `1 dzień temu`;
     }
     else if (minutes > 60 * 2) {
-        return `godzinę temu`;
+        return `${Math.ceil(minutes / 60)} h temu`;
     }
     else if (minutes > 60) {
-        return `${Math.ceil(minutes / 60)} h temu`;
+        return `godzinę temu`;
     }
     else if (minutes > 2) {
         return `${Math.ceil(minutes)} min temu`;

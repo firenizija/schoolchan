@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 import Draggable from 'react-draggable';
+import autosize from 'autosize'
 
 import closeIco from 'svg/closeIco.svg';
 import formIco from 'svg/formIco.svg';
@@ -58,6 +59,7 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
         }
 
     }
+    autosize(document.querySelector('textarea'))
 
     return (
         <Draggable
@@ -83,7 +85,7 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
                 </label>
                     <textarea
                         name="body"
-                        className="createPostForm__commentBody"
+                        className="createPostForm__postBody"
                         rows="8"
                         placeholder="Nie ma to jak koronawirus x_x"
                         onChange={e => setBody(e.target.value)}

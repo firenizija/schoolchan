@@ -3,19 +3,37 @@ import racoonMale from 'svg/racoon_male.svg';
 import reportIcon from 'svg/report.svg';
 import Comments from './Comments'
 import whenPosted from 'helper/whenPosted'
+import { useSelector } from 'react-redux'
 
 import './styles/post.scss';
 
 const Post = ({ post }) => {
+    const socket = useSelector(state => state.socket)
     const [commentsView, setCommentsView] = useState(false);
-    const [commentsLength, setCommentsLength] = useState()
+    let { comments, image, body, createdAt, username, _id } = post;
+    const [postComments, setPostComments] = useState(comments);
+    let commentsLength
+    try {
+        commentsLength = postComments.length
+    } catch (err) {
+        commentsLength = 0
+        setPostComments([])
+    }
+    let shortPosts
+    try {
+        shortPosts = postComments.slice(0, 3)
+    } catch (err) {
+        shortPosts = []
+    }
 
-    let { comments, image, body, createdAt, username } = post;
-    //if comments is undefined make it array
-    comments = comments ? comments : [];
     useEffect(() => {
-        setCommentsLength(comments.length)
-    }, [comments.length])
+        socket.on('comment', (comment) => {
+            if (comment.postId === _id) {
+                setPostComments([...postComments, comment])
+            }
+        });
+    }, [socket, postComments, _id]);
+
 
     return (
         <li className="post">
@@ -53,20 +71,22 @@ const Post = ({ post }) => {
                         <span>&nbsp;przeciw</span>
                     </div>
                     <ul className="post__comments">
-                        {comments[0] ?
-                            <li>
-                                <span className="post__username">{comments[0].username}</span> {comments[0].commentText}
+                        {shortPosts.map((comment, key) => (
+                            <li key={key}>
+                                <span className="post__username">{comment.username}</span> {comment.commentText}
                             </li>
-                            : null}
-                        {comments[1] ?
+                        ))}
+                        {commentsLength > 3 ?
                             <li>
-                                <span className="post__username">{comments[1].username}</span> {comments[1].commentText}
+                                <button className="post__showAllButton" onClick={() => setCommentsView(true)}>
+                                    Zobacz wszystkie
+                                </button>
                             </li>
                             : null}
                     </ul>
                 </div>
             </div>
-            {commentsView ? <Comments post={post} setCommentsView={setCommentsView} /> : null}
+            {commentsView ? <Comments post={post} postComments={postComments} setCommentsView={setCommentsView} focus={commentsLength === 0 ? true : false} /> : null}
         </li>
     );
 }

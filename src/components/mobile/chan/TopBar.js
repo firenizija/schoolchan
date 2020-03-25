@@ -9,7 +9,7 @@ const TopBar = () => {
         <div className="topBar">
             <ul className="topBar__optionsList">
                 <li className="topBar__options topBar__options--button">
-                    <button className="topBar__button topBar__button--menu">
+                    <button className="topBar__button topBar__button--menu" onClick={() => localStorage.setItem("token", "")}>
                         <img src={userIco} alt="" />
                     </button>
                 </li>

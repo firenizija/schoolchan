@@ -6,27 +6,29 @@ import Start from 'components/mobile/start/Start';
 import Main from 'components/mobile/chan/Main';
 import isMobile from 'is-mobile';
 
-const ENDPOINT = process.env.REACT_APP_API;
 let socket;
+
 const SocketConnect = () => {
+    const ENDPOINT = process.env.REACT_APP_API;
     const dispatch = useDispatch();
     const isLogged = useSelector(state => state.isLogged);
     useEffect(() => {
         socket = io(ENDPOINT, {
             'query': 'token=' + localStorage.getItem("token")
         });
-
+        dispatch(SetSocket(socket));
         socket.on("error", function (err) {
             if (err) {
                 localStorage.removeItem("token");
                 dispatch(SignOut())
             }
         });
+        socket.on('connect', () => {
 
+        })
         socket.on('userInfo', (res) => {
             // setUsername(res.username);
             // setSchool(res.school);
-            dispatch(SetSocket(socket));
             socket.emit('joinChan', (error) => {
                 if (error) {
                     alert(error);
@@ -39,8 +41,7 @@ const SocketConnect = () => {
             localStorage.removeItem("token");
             dispatch(SignOut())
         });
-        // eslint-disable-next-line 
-    }, [ENDPOINT, dispatch]);
+    }, [ENDPOINT, dispatch, socket]);
     return (
         <>
             {isLogged ?
