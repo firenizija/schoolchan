@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import racoonMale from 'svg/racoon_male.svg';
 import reportIcon from 'svg/report.svg';
 import Comments from './Comments'
+import useForceUpdate from 'use-force-update'
 import whenPosted from 'helper/whenPosted'
 import { useSelector } from 'react-redux'
 
@@ -9,30 +10,28 @@ import './styles/post.scss';
 
 const Post = ({ post }) => {
     const socket = useSelector(state => state.socket)
-    const [commentsView, setCommentsView] = useState(false);
+    const [commentsLength, setCommentsLength] = useState(0);
+
+    const forceUpdate = useForceUpdate();
     let { comments, image, body, createdAt, username, _id } = post;
-    const [postComments, setPostComments] = useState(comments);
-    let commentsLength
-    try {
-        commentsLength = postComments.length
-    } catch (err) {
-        commentsLength = 0
-        setPostComments([])
-    }
-    let shortPosts
-    try {
-        shortPosts = postComments.slice(0, 3)
-    } catch (err) {
-        shortPosts = []
-    }
+
+    useEffect(() => {
+        try {
+            setCommentsLength(comments.length)
+        } catch (error) {
+            setCommentsLength(0)
+        }
+    }, [comments.length]);
 
     useEffect(() => {
         socket.on('comment', (comment) => {
-            if (comment.postId === _id) {
-                setPostComments([...postComments, comment])
+            if (_id === comment.postId) {
+                setCommentsLength(comments.length + 1)
+                comments.push(comment)
+                forceUpdate()
             }
-        });
-    }, [socket, postComments, _id]);
+        })
+    }, [comments, socket, _id, forceUpdate]);
 
 
     return (
@@ -48,7 +47,10 @@ const Post = ({ post }) => {
                     <button className="post__dislike">-1</button>
                     <button
                         className="post__commentsButton"
-                        onClick={() => setCommentsView(true)}
+                        onClick={() => {
+                            window.location.hash = "comments";
+                            forceUpdate()
+                        }}
                     >
                         {commentsLength === 0 ? "Napisz komentarz" : `Komentarze ${commentsLength}`}
                     </button>
@@ -71,14 +73,20 @@ const Post = ({ post }) => {
                         <span>&nbsp;przeciw</span>
                     </div>
                     <ul className="post__comments">
-                        {shortPosts.map((comment, key) => (
+                        {comments.slice(0).reverse().slice(0, 3).map((comment, key) => (
                             <li key={key}>
                                 <span className="post__username">{comment.username}</span> {comment.commentText}
                             </li>
                         ))}
                         {commentsLength > 3 ?
                             <li>
-                                <button className="post__showAllButton" onClick={() => setCommentsView(true)}>
+                                <button
+                                    className="post__showAllButton"
+                                    onClick={() => {
+                                        window.location.hash = "comments";
+                                        forceUpdate()
+                                    }}
+                                >
                                     Zobacz wszystkie
                                 </button>
                             </li>
@@ -86,7 +94,13 @@ const Post = ({ post }) => {
                     </ul>
                 </div>
             </div>
-            {commentsView ? <Comments post={post} postComments={postComments} setCommentsView={setCommentsView} focus={commentsLength === 0 ? true : false} /> : null}
+            {window.location.hash === "#comments" ?
+                <Comments
+                    forceUpdatePost={forceUpdate}
+                    post={post}
+                    postComments={comments}
+                    focus={commentsLength === 0 ? true : false} />
+                : null}
         </li>
     );
 }

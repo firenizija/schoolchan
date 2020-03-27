@@ -41,6 +41,7 @@ const SocketConnect = () => {
             localStorage.removeItem("token");
             dispatch(SignOut())
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ENDPOINT, dispatch, socket]);
     return (
         <>

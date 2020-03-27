@@ -96,7 +96,7 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
                     <label className="createPostForm__label" htmlFor="image">
                         Obraz:
                 </label>
-                    <label>
+                    <label className="createPostForm__labelButtonStyle">
                         <img src={image === "" ? uploadImageIco : uploadImageDoneIco} alt="upload" className="createPostForm__uploadImg" />
                         <input
                             className="createPostForm__imageButton"

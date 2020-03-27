@@ -13,6 +13,7 @@ const Posts = () => {
             setPosts(data)
         })
         socket.on('post', data => {
+            data.comments = []
             setPosts([data, ...posts])
         })
     }
