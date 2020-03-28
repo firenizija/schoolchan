@@ -6,6 +6,9 @@ const Main = () => {
     window.onbeforeunload = () => {
         return "Napewno chcesz opuścić stronę?";
     }
+    window.onload = () => {
+        window.location.hash = "";
+    }
     return (
         <div>
             <TopBar />

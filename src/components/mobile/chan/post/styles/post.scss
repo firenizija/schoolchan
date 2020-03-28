@@ -31,6 +31,8 @@
     &__body{
         font-size: 1.2em;
         margin: .5em 0;
+        max-width: 70vw;
+        overflow-wrap: break-word;
     }
     &__image{
         width: 100%;
@@ -74,6 +76,8 @@
     }
     &__comments{
         margin-top: 1em;
+        max-width: 85vw;
+        overflow-wrap: break-word;
     }
     &__showAllButton{
         color:gray;

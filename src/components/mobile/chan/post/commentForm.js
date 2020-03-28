@@ -3,7 +3,8 @@ import autosize from 'autosize'
 import { useSelector } from 'react-redux';
 import imageIcon from 'svg/image_icon.svg';
 
-import './styles/commentForm.scss'
+import './styles/commentForm.scss';
+
 const CommentForm = ({ focus, post }) => {
     const [image, setImage] = useState("");
     const [commentText, setCommentText] = useState("");

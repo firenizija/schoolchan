@@ -2,15 +2,21 @@
     display: flex;
     align-items: center;
     margin: 1em 0;
+    pointer-events: none;
     &__text{
         font-size: 1.2em;
+        max-width: 75vw;
+        overflow-wrap: break-word;
     }
     &__sex{
+        align-self: flex-start;
         margin-right: 1em;
+        height: 3.5em;
     }
     &__username{
         color:#4176FF;
-        font-size: 1.2em;
+        font-size: 1.05em;
+        height: 3.5em;
         font-weight: 700;
     }
 }

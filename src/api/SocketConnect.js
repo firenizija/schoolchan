@@ -20,7 +20,7 @@ const SocketConnect = () => {
         socket.on("error", function (err) {
             if (err) {
                 localStorage.removeItem("token");
-                dispatch(SignOut())
+                dispatch(SignOut());
             }
         });
         socket.on('connect', () => {
