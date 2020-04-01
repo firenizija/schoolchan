@@ -5,9 +5,9 @@ import CreatePost from './createPost/CreatePost'
 import './styles/chan.scss'
 
 
-const Chan = () => {
+const Chan = ({ setMenu }) => {
     return (
-        <div className="chan">
+        <div className="chan" onClick={() => setMenu(false)}>
             <Posts />
             <CreatePost />
         </div>

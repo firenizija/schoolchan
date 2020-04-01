@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TopBar from './TopBar';
-import Chan from './Chan'
+import Chan from './Chan';
+import Menu from './aside/menu/Menu';
 
 const Main = () => {
-    window.onbeforeunload = () => {
-        return "Napewno chcesz opuścić stronę?";
-    }
+    const [menu, setMenu] = useState(false);
     window.onload = () => {
         window.location.hash = "";
     }
+
     return (
         <div>
-            <TopBar />
-            <Chan />
+            <TopBar setMenu={setMenu} />
+            {menu ? <Menu setMenu={setMenu} /> : null}
+            <Chan setMenu={setMenu} />
         </div>
     );
 }

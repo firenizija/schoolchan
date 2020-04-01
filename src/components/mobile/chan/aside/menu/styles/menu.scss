@@ -1,0 +1,33 @@
+.menu{
+    height: 100%;
+    width: 60%;
+    background-color: rgb(245, 245, 245);
+    position: fixed;
+    top: 0;
+    &__close{
+        position: absolute;
+        right: 20px;
+        // top: 20px;
+    }
+    &__header{
+        margin: 15% 0 25% 20px;
+        font-size: 1.5em;
+    }
+    &__username{
+        color:#4176FF;
+        font-weight: 700;
+    }
+    &__option{
+        margin: 10% 20px;
+        padding:5% 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.246);
+        font-size: 1.4em;
+        &--chosen{
+            font-weight: 700;
+        }
+        &--logout{
+            color:red;
+
+        }
+    }
+}

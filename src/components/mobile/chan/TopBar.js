@@ -4,12 +4,12 @@ import userIco from 'svg/userIco.svg'
 
 import './styles/topBar.scss'
 
-const TopBar = () => {
+const TopBar = ({ setMenu }) => {
     return (
         <div className="topBar">
             <ul className="topBar__optionsList">
                 <li className="topBar__options topBar__options--button">
-                    <button className="topBar__button topBar__button--menu" onClick={() => localStorage.setItem("token", "")}>
+                    <button className="topBar__button topBar__button--menu" onClick={() => setMenu(true)}>
                         <img src={userIco} alt="" />
                     </button>
                 </li>
