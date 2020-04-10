@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "84e2a2819e939311137bdf43cfcf3933",
+    "revision": "b66a745e1ffc7de09790289886a67131",
     "url": "/index.html"
   },
   {
-    "revision": "a7e19546260f08c59b38",
-    "url": "/static/css/main.4c39aea3.chunk.css"
+    "revision": "3c617393ccab45545e6a",
+    "url": "/static/css/main.cff0b46c.chunk.css"
   },
   {
-    "revision": "e537786a4e0ba7fa957b",
-    "url": "/static/js/2.9c0c48e7.chunk.js"
+    "revision": "49ee63bdd6fc3f654338",
+    "url": "/static/js/2.6d1c9cea.chunk.js"
   },
   {
-    "revision": "904f561e5419599edd58b03375725069",
-    "url": "/static/js/2.9c0c48e7.chunk.js.LICENSE.txt"
+    "revision": "7e93c1d3202d95d2517fd6a8b9d0b089",
+    "url": "/static/js/2.6d1c9cea.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a7e19546260f08c59b38",
-    "url": "/static/js/main.9acfa6e3.chunk.js"
+    "revision": "3c617393ccab45545e6a",
+    "url": "/static/js/main.ca70f406.chunk.js"
   },
   {
     "revision": "eee031220e41da68b139",
@@ -28,8 +28,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/addIco.a83663f3.svg"
   },
   {
+    "revision": "e487a03449b4aacbce34f300703f7f33",
+    "url": "/static/media/all.e487a034.svg"
+  },
+  {
     "revision": "1d0275984a21182b42c40d89af3b5ceb",
     "url": "/static/media/arrow.1d027598.svg"
+  },
+  {
+    "revision": "49052b35c6d93aaf3c7c943e4e258864",
+    "url": "/static/media/backButton.49052b35.svg"
   },
   {
     "revision": "8bf6e5a879bd4f85d49ed11ab03140ce",
@@ -52,12 +60,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/image_icon.eae12adf.svg"
   },
   {
+    "revision": "d9414f81adcd86d39c46aab0b2169596",
+    "url": "/static/media/newChat.d9414f81.svg"
+  },
+  {
+    "revision": "86d4e5831a3c3d784a36d70968f00770",
+    "url": "/static/media/online.86d4e583.svg"
+  },
+  {
     "revision": "9eabe41631c63c88a4f680ce520d1690",
     "url": "/static/media/racoon_male.9eabe416.svg"
   },
   {
     "revision": "b7a16ce73fb9789ced5954a184b534cb",
     "url": "/static/media/report.b7a16ce7.svg"
+  },
+  {
+    "revision": "3ee2f767abe9165bd4068af71fea2439",
+    "url": "/static/media/sendMessage.3ee2f767.svg"
   },
   {
     "revision": "af8867ce40593ec4a20572fc2f3b2487",
