@@ -1,0 +1,29 @@
+.topBarChat{
+    width: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(121, 121, 121,0.3);
+    &__backButton{
+        flex:1;
+    }
+    &__title{
+        font-size: 1.5em;
+        flex:100%;
+        text-align: center;
+    }
+    &__online{
+        display: flex;
+        flex:1;
+    }
+    &__onlineNumber{
+        margin-right: .5em;
+        color:#3078FF;
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+}

@@ -3,7 +3,7 @@ import closeIco from 'svg/closeIco.svg'
 
 import './styles/menu.scss';
 const logout = () => {
-    localStorage.setItem("token", "");
+    localStorage.setItem("token", null);
     window.location.reload();
 }
 

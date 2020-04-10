@@ -1,0 +1,30 @@
+.chat{
+    padding: 80px 30px;
+    width: 100%;
+    height: 100vh;
+    &__all{
+        background-image: linear-gradient(to left, #2979FF, #8D5CFF, #FB3CFF);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+        border-radius: 15px;
+        font-size: 1.2em;
+        font-weight: 700;
+        padding: 10px;
+    }
+    &__allHeader{
+        display: flex;
+        align-items: center;
+    }
+    &__allOnline{
+        display: flex;
+    }
+    &__allTitle{
+        margin: 0 15px
+    }
+    &__allOnlineNumber{
+        margin: 0 15px
+    }
+}

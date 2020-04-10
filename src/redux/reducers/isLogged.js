@@ -1,4 +1,4 @@
-const tokenIsSet = localStorage.getItem("token") !== "";
+const tokenIsSet = localStorage.getItem("token") !== null;
 const loggedReducer = (state = tokenIsSet, action) => {
     switch (action.type) {
         case 'SIGN_IN':

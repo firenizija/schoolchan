@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import io from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignOut, SetSocket } from 'redux/actions/index';
+import { SignOut, SetSocket, SetUser } from 'redux/actions/index';
 import Start from 'components/mobile/start/Start';
 import Main from 'components/mobile/chan/Main';
 import isMobile from 'is-mobile';
@@ -27,8 +27,7 @@ const SocketConnect = () => {
 
         })
         socket.on('userInfo', (res) => {
-            // setUsername(res.username);
-            // setSchool(res.school);
+            dispatch(SetUser(res));
             socket.emit('joinChan', (error) => {
                 if (error) {
                     alert(error);

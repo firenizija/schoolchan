@@ -6,8 +6,12 @@ import './styles/chan.scss'
 
 
 const Chan = ({ setMenu }) => {
+    const visible = { display: "block" };
+    if (window.location.hash !== "") {
+        visible.display = "none";
+    } else visible.display = "block";
     return (
-        <div className="chan" onClick={() => setMenu(false)}>
+        <div style={visible} className="chan" onClick={() => setMenu(false)}>
             <Posts />
             <CreatePost />
         </div>

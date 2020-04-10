@@ -1,0 +1,32 @@
+.message{
+    max-width: 70%;
+    display: flex;
+    align-items: center;
+    margin: 2em 0;
+    &--end{
+        flex-flow: row-reverse;
+        margin-left: auto;
+    }
+    &:last-child{
+        margin-bottom: 2em;
+    }
+    &:first-child{
+        margin-top: 5em;
+    }
+    &__speechBubble{
+        border: .5px solid rgba(128, 128, 128, 0.472);
+        border-radius: 20px;
+        padding: 1em;
+        font-size: 1.2em;
+        overflow-wrap: break-word;
+        max-width: 100%;
+        &--end{
+            background-color: #3078FF;
+            color:white;
+        }
+    }
+    &__username{
+        margin: 0 1em;
+        color: gray;
+    }
+}

@@ -16,3 +16,24 @@ export const SetSocket = (socket) => {
         socket
     }
 }
+
+export const SetPosts = (posts) => {
+    return {
+        type: 'SET_POSTS',
+        posts
+    }
+}
+
+export const AddPost = (post) => {
+    return {
+        type: 'ADD_POST',
+        post
+    }
+}
+
+export const SetUser = (user) => {
+    return {
+        type: 'SET_USER',
+        user
+    }
+}
