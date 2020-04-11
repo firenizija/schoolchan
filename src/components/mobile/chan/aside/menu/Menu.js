@@ -1,5 +1,6 @@
 import React from 'react';
 import closeIco from 'svg/closeIco.svg'
+import { useSelector } from 'react-redux';
 
 import './styles/menu.scss';
 const logout = () => {
@@ -8,10 +9,11 @@ const logout = () => {
 }
 
 const Menu = ({ setMenu }) => {
+    const username = useSelector(state => state.userInfo.username);
     return (
         <aside className="menu">
             <div className="menu__header">
-                Witaj, <span className="menu__username" >adam</span>
+                Witaj, <span className="menu__username" >{username}</span>
                 <button className="menu__close" onClick={() => setMenu(false)}>
                     <img src={closeIco} alt="close" />
                 </button>

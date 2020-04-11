@@ -1,8 +1,9 @@
 .messageForm{
     width: 95%;
     display: flex;
-    position: fixed;
-    bottom: 1em;
+    position: relative;
+    // bottom: 1em;
+    margin:1em 0;
     justify-content: center;
     align-items: flex-end;
     border: 0.5px solid gray;

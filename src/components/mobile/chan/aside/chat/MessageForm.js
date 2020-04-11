@@ -31,6 +31,7 @@ const MessageForm = () => {
                 placeholder="Napisz wiadomość..."
                 onChange={e => setMessageText(e.target.value)}
                 value={messageText}
+                autoFocus
             ></textarea>
             <button
                 className="messageForm__sendMessageButton"

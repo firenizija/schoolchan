@@ -6,8 +6,6 @@ import MessageForm from './MessageForm';
 import './styles/conversation.scss'
 
 const Conversation = ({ chatWith, setChatWith }) => {
-    const objDiv = document.querySelector('.conversation');
-    if (objDiv) objDiv.scrollTop = objDiv.scrollHeight;
     return (
         <div className="conversation">
             <TopBarChat chatWith={chatWith} setChatWith={setChatWith} />
