@@ -13,12 +13,13 @@ const MessageForm = () => {
 
     autosize(document.querySelector('.messageForm__textarea'));
 
-    const handleClickSend = () => {
+    const handleClickSend = (e) => {
+        e.preventDefault()
         const messageObj = { messageText, messageImage }
         socket.emit('sendMessage', messageObj);
         setMessageText('');
     }
-
+    console.log("wow")
     return (
         <div className="messageForm">
             <button className="messageForm__sendImageButton">
@@ -30,12 +31,13 @@ const MessageForm = () => {
                 wrap="hard"
                 placeholder="Napisz wiadomość..."
                 onChange={e => setMessageText(e.target.value)}
+                onKeyPress={e => e.key === 'Enter' ? handleClickSend(e) : null}
                 value={messageText}
                 autoFocus
             ></textarea>
             <button
                 className="messageForm__sendMessageButton"
-                onClick={() => handleClickSend()}
+                onClick={(e) => handleClickSend(e)}
             >
                 <img src={sendMessage} alt="" />
             </button>

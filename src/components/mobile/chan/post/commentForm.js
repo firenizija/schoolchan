@@ -73,6 +73,7 @@ const CommentForm = ({ focus, post }) => {
                 className="commentForm__textInput"
                 onChange={e => setCommentText(e.target.value)}
                 value={commentText}
+                onKeyPress={e => e.key === 'Enter' ? sendComment(e) : null}
             >
             </textarea>
             <button className="commentForm__submit" onClick={e => sendComment(e)}>⌲</button>

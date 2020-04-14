@@ -5,4 +5,27 @@
     overflow: auto;
     flex: auto;
     border-bottom: .3px solid black;
+
+    &__scrollButton{
+        background-color: rgba(48, 120, 255, 0.5);
+        border:1px solid rgba(0, 0, 0, 0.2);
+    }
+    &__loadMoreButton{
+        margin: 50px 0;
+        // position: relative;
+        // width: 100%;
+        // height: 200px;
+        // background-color: rgba(48, 120, 255, 0.5);
+        // border-radius: 0 0 100% 100%;
+        // margin-bottom: 100px;
+        // &::before{
+        //     content: "Wczytaj starsze";
+        //     position: absolute;
+        //     color: white;
+        //     bottom: 1em;
+        //     left: 0;
+        //     width: 100vw;
+        //     text-align: center;
+        // }
+    }
 }

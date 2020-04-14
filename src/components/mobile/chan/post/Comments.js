@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Comment from './Comment';
 import { useSelector } from 'react-redux';
-import CommentForm from './commentForm';
+import CommentForm from './CommentForm';
 import backIco from 'svg/backIco.svg';
 import useForceUpdate from 'use-force-update'
 // import uploadImage from 'api/uploadImage';
