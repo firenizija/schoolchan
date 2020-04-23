@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import './styles/post.scss';
 
 const Post = ({ post }) => {
-    const socket = useSelector(state => state.socket)
+    const socket = useSelector(state => state.socket);
     const [commentsLength, setCommentsLength] = useState(0);
 
     const forceUpdate = useForceUpdate();
@@ -17,18 +17,18 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         try {
-            setCommentsLength(comments.length)
+            setCommentsLength(comments.length);
         } catch (error) {
-            setCommentsLength(0)
+            setCommentsLength(0);
         }
     }, [comments.length]);
 
     useEffect(() => {
         socket.on('comment', (comment) => {
             if (_id === comment.postId) {
-                setCommentsLength(comments.length + 1)
-                comments.push(comment)
-                forceUpdate()
+                setCommentsLength(comments.length + 1);
+                comments.push(comment);
+                forceUpdate();
             }
         })
     }, [comments, socket, _id, forceUpdate]);

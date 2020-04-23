@@ -1,57 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Post from './Post'
 import { useSelector, useDispatch } from 'react-redux'
-import useForceUpdate from 'use-force-update'
-import { SetPosts } from 'redux/actions/index';
+import { SetPosts, SetMyPosts, AddPost } from 'redux/actions/index';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 
 import './styles/posts.scss'
 let lastPostId
-const Posts = () => {
+let waitForMorePosts = false;
+const Posts = ({ postType }) => {
     const dispatch = useDispatch();
     const socket = useSelector(state => state.socket);
-    const reduxPosts = useSelector(state => state.posts);
-    const [posts, setPosts] = useState(reduxPosts.posts);
-    const forceUpdate = useForceUpdate();
-    let wait = false;//wait for more posts
+    const posts = useSelector(state => state.posts);
 
     useEffect(() => {
         if (socket) {
             socket.on('posts', data => {
-                dispatch(SetPosts(data))
-                setPosts(data);
-                lastPostId = data[data.length - 1]._id
+                if (data.length > 0) {
+                    dispatch(SetPosts(data))
+                    lastPostId = data[data.length - 1]._id
+                }
             })
             socket.on('post', data => {
-                // setPosts([data, ...posts]);
-                setPosts([...posts, data]);
+                dispatch(AddPost(data))
             })
             socket.on('morePosts', data => {
-                setPosts(posts.concat(data));
-                lastPostId = data[data.length - 1]._id
-                // eslint-disable-next-line react-hooks/exhaustive-deps
-                wait = false;
+                if (data.length > 0) {
+                    data.map(post => dispatch(AddPost(post)));
+                    lastPostId = data[data.length - 1]._id
+                    waitForMorePosts = false;
+                }
             })
-        } else {
-            forceUpdate();
+            socket.on('myPosts', myPosts => {
+                dispatch(SetMyPosts(myPosts))
+            });
         }
-    }, [forceUpdate, socket, posts, dispatch]);
-    useEffect(() => {
-        dispatch(SetPosts(posts));
-    }, [posts, dispatch])
+
+    }, [dispatch, socket]);
+
     useScrollPosition(({ prevPos, currPos }) => {
         const scrollProgress = (document.body.offsetHeight - window.innerHeight) + currPos.y;
-        if (!wait && scrollProgress < 0) {
+        if (!waitForMorePosts && scrollProgress < 0) {
             socket.emit('getMorePosts', lastPostId);
-            wait = true;
+            waitForMorePosts = true;
         }
     }, [posts],
         null,
         false,
         300)
+
     return (
         <ul className="posts">
-            {posts.map((post, id) => (
+            {posts[postType].map((post) => (
                 <Post
                     key={post._id}
                     post={post}

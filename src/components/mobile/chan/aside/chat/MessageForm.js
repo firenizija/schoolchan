@@ -19,7 +19,6 @@ const MessageForm = () => {
         socket.emit('sendMessage', messageObj);
         setMessageText('');
     }
-    console.log("wow")
     return (
         <div className="messageForm">
             <button className="messageForm__sendImageButton">

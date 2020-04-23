@@ -14,7 +14,7 @@ const Comments = ({ post, focus, postComments, forceUpdatePost }) => {
     useEffect(() => {
         if (socket) {
             socket.on("comment", () => {
-                forceUpdate()
+                forceUpdate();
             });
         }
     }, [socket, forceUpdate]);

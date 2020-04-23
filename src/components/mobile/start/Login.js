@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { SignIn } from 'redux/actions/index';
+import { SignIn, SetSocket } from 'redux/actions/index';
+import { getCookie, setCookie } from 'helper/cookies'
 
 import './style/login.scss'
 import arrow from 'svg/arrow.svg'
@@ -9,8 +10,9 @@ const Login = ({ switchFormState }) => {
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
     const dispatch = useDispatch();
-
+    const tokenCookie = getCookie('token');
     const errorController = (status) => {
         if (status === 400) {
             setError("Wpisz dane logowania");
@@ -38,6 +40,10 @@ const Login = ({ switchFormState }) => {
                     console.log("Złe dane");
                 } else {
                     localStorage.setItem("token", data.token);
+                    if (rememberMe) {
+                        setCookie('token', data.token, 7);
+                    }
+                    dispatch(SetSocket())
                     dispatch(SignIn());
                 }
             })
@@ -47,6 +53,14 @@ const Login = ({ switchFormState }) => {
             });
         e.preventDefault();
     }
+
+    if (tokenCookie.length > 0) {
+        localStorage.setItem("token", data.token);
+        dispatch(SetSocket())
+        dispatch(SignIn());
+    }
+
+
     return (
         <div className="login">
             <h1 className="login__title">
@@ -77,11 +91,15 @@ const Login = ({ switchFormState }) => {
                             type="checkbox"
                             name="remember"
                             className="login__rememberCheckbox"
+                            onChange={e => setRememberMe(e.target.checked)}
+                            checked={rememberMe}
                         />
                         Pamiętaj mnie
                     </label>
                 </div>
-                <button className="login__loginButton">
+                <button
+                    className="login__loginButton"
+                >
                     Zaloguj się <img src={arrow} alt="" />
                 </button>
                 <button className="login__registerButton" onClick={() => switchFormState('register')}>Stwórz nowe konto</button>

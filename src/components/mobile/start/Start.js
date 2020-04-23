@@ -6,7 +6,9 @@ import './style/start.scss'
 
 const Start = () => {
     const [formState, switchFormState] = useState('login');
-
+    window.onload = () => {
+        window.location.hash = "";
+    }
     return (
         <div className="start">
             <div className="start__bannerText">

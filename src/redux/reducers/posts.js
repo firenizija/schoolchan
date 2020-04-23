@@ -1,18 +1,26 @@
-const posts = (state = [], action) => {
+const postsObj = {
+    posts: [],
+    myPosts: [],
+}
+const posts = (state = postsObj, action) => {
     switch (action.type) {
         case 'SET_POSTS':
             return {
+                ...state,
                 posts: action.posts
+            }
+        case 'SET_MY_POSTS':
+            return {
+                ...state,
+                myPosts: action.myPosts
             }
         case 'ADD_POST':
             return {
                 ...state,
-                posts: [action.post, ...state.posts]
+                posts: [...state.posts, action.post]
             }
         default:
-            return {
-                posts: []
-            };
+            return state
     }
 };
 
