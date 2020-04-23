@@ -4,7 +4,10 @@
     overflow: hidden;
     flex: auto;
     border-bottom: .3px solid black;
-
+    &__scroll{
+    overflow: scroll;
+    height: 100%;
+    }
     &__scrollButton{
         background-color: rgba(48, 120, 255, 0.5);
         border:1px solid rgba(0, 0, 0, 0.2);

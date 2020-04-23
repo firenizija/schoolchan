@@ -12,8 +12,6 @@ const SocketConnect = () => {
     const socket = useSelector(state => state.socket);
     const userInfo = useSelector(state => state.userInfo)
 
-    console.count("SocketConnect Render")
-
     useEffect(() => {
         if (socket) {
             socket.on("error", function (err) {
