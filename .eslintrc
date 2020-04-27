@@ -1,0 +1,30 @@
+{
+  "extends": ["prettier", "airbnb", "prettier/react"],
+  "env": {
+    "jest": true
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "fetch": true,
+    "localStorage": true,
+    "alert": true,
+    "Headers": true,
+    "FileReader": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js"]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  }
+}
