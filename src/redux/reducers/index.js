@@ -1,16 +1,13 @@
-import isLogged from './isLogged'
-import socket from './socket'
-import posts from './posts'
-import userInfo from './userInfo'
-import messages from './messages'
-
 import { combineReducers } from 'redux';
+import socket from './socket';
+import posts from './posts';
+import userInfo from './userInfo';
+import messages from './messages';
 
 const AllReducers = combineReducers({
-    isLogged,
-    socket,
-    posts,
-    userInfo,
-    messages
-})
+  socket,
+  posts,
+  userInfo,
+  messages,
+});
 export default AllReducers;

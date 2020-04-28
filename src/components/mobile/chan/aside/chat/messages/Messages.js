@@ -1,19 +1,17 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { SetMessages, AddMessage, AddMoreMessages } from 'redux/actions/index';
+import { useSelector, connect } from 'react-redux';
 import Message from './Message';
 
 import './styles/messages.scss';
 
-let isWaitingForMessages = false;
-let lastMessageId;
-const Messages = ({ chatWith }) => {
-  const dispatch = useDispatch();
+const Messages = ({ messages }) => {
+  let isWaitingForMessages = false;
+
   const socket = useSelector((state) => state.socket);
   const username = useSelector((state) => state.userInfo.username);
-  const messages = useSelector((state) => state.messages);
+  const [autoScroll, setAutoScroll] = useState(true);
 
   const scrollToBottom = (speed) => {
     const bottom = document.querySelector('#bottom');
@@ -24,33 +22,11 @@ const Messages = ({ chatWith }) => {
     }
   };
 
-  useEffect(() => {
-    socket.on('message', (message) => {
-      dispatch(AddMessage(message));
-    });
-    socket.on('moreMessages', (message) => {
-      if (message.length > 0) {
-        lastMessageId = message[message.length - 1]._id;
-        message.map((data) => dispatch(AddMoreMessages(data)));
-        isWaitingForMessages = false;
-      }
-    });
-  }, [dispatch, socket]);
-
-  useEffect(() => {
-    socket.emit('joinChat', chatWith);
-    socket.on('messages', (messagesDatabase) => {
-      if (messagesDatabase.length > 0) {
-        lastMessageId = messagesDatabase[0]._id;
-        dispatch(SetMessages(messagesDatabase));
-        scrollToBottom('fast');
-      }
-    });
-  }, [chatWith, dispatch, socket]);
   const loadMoreMessages = () => {
     isWaitingForMessages = true;
-    socket.emit('getMoreMessages', lastMessageId);
+    socket.emit('getMoreMessages', messages.messagesLastId);
   };
+
   useEffect(() => {
     const messagesBlock = document.querySelector('.messages__scroll');
     const button = document.querySelector('.messages__loadMoreButton');
@@ -76,7 +52,14 @@ const Messages = ({ chatWith }) => {
     if (newMessage.length > 0) {
       const msgHeight = scrollHeight - scrollTop - offsetHeight;
       const scrollHeightMessages = msgHeight - newMessage[newMessage.length - 1].offsetHeight - 24;
-      if (scrollHeightMessages < 100) scrollToBottom('smooth');
+      if (scrollHeightMessages < 100) {
+        setAutoScroll(true);
+      } else {
+        setAutoScroll(false);
+      }
+    }
+    if (autoScroll) {
+      scrollToBottom('smooth');
     }
   }, [messages]);
 
@@ -99,11 +82,9 @@ const Messages = ({ chatWith }) => {
 };
 
 Messages.propTypes = {
-  chatWith: PropTypes.string,
+  messages: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-Messages.defaultProps = {
-  chatWith: 'all',
-};
+const mapMessages = (messages) => messages;
 
-export default Messages;
+export default connect(mapMessages)(Messages);

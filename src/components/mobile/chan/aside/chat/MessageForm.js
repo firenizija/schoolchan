@@ -13,6 +13,11 @@ const MessageForm = () => {
 
   autosize(document.querySelector('.messageForm__textarea'));
 
+  const handleFocus = () => {
+    const bottom = document.querySelector('#bottom');
+    bottom.scrollIntoView();
+  };
+
   const handleClickSend = (e) => {
     e.preventDefault();
     const messageObj = { messageText, messageImage };
@@ -36,6 +41,7 @@ const MessageForm = () => {
         onChange={(e) => setMessageText(e.target.value)}
         onKeyPress={(e) => (e.key === 'Enter' ? handleClickSend(e) : null)}
         value={messageText}
+        onFocus={() => handleFocus()}
       />
       <button
         type="button"

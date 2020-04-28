@@ -76,7 +76,9 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
           <button
             type="button"
             className="createPostForm__closeButton"
-            onClick={() => setCreatePostFrom(false)}
+            onClick={() => {
+              setCreatePostFrom(false);
+            }}
           >
             <img src={closeIco} alt="closeForm" />
           </button>

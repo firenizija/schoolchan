@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import useForceUpdate from 'use-force-update';
+import SocketPosts from 'api/SocketPosts';
+import SocketMessages from 'api/SocketMessages';
 import TopBar from './TopBar';
 import Chan from './Chan';
 import Chat from './aside/chat/Chat';
@@ -14,6 +16,8 @@ const Main = () => {
   };
   return (
     <div>
+      <SocketPosts />
+      <SocketMessages />
       <TopBar setMenu={setMenu} forceUpdateMain={forceUpdate} />
       {window.location.hash.indexOf('chat') > 0 ? <Chat forceUpdateMain={forceUpdate} /> : null}
       {menu ? <Menu setMenu={setMenu} setPostType={setPostType} postType={postType} /> : null}

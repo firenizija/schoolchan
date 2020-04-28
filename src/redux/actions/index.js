@@ -1,19 +1,12 @@
-export const SignIn = () => ({
-  type: 'SIGN_IN',
-});
-
-export const SignOut = () => ({
-  type: 'SIGN_OUT',
-});
-
 export const SetSocket = (socket) => ({
   type: 'SET_SOCKET',
   socket,
 });
 
-export const SetPosts = (posts) => ({
+export const SetPosts = (posts, postsLastId) => ({
   type: 'SET_POSTS',
   posts,
+  postsLastId,
 });
 
 export const SetMyPosts = (myPosts) => ({
@@ -26,14 +19,21 @@ export const AddPost = (post) => ({
   post,
 });
 
+export const AddPosts = (post, postsLastId) => ({
+  type: 'ADD_POSTS',
+  post,
+  postsLastId,
+});
+
 export const SetUser = (user) => ({
   type: 'SET_USER',
   user,
 });
 
-export const SetMessages = (messages) => ({
+export const SetMessages = (messages, messagesLastId) => ({
   type: 'SET_MESSAGES',
   messages,
+  messagesLastId,
 });
 
 export const ResetMessages = () => ({
@@ -45,7 +45,8 @@ export const AddMessage = (message) => ({
   message,
 });
 
-export const AddMoreMessages = (moreMessages) => ({
+export const AddMoreMessages = (moreMessages, messagesLastId) => ({
   type: 'ADD_MORE_MESSAGES',
   moreMessages,
+  messagesLastId,
 });

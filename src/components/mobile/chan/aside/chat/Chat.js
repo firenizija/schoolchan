@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import all from 'svg/all.svg';
 import online from 'svg/online.svg';
-import { useDispatch } from 'react-redux';
-import { ResetMessages } from 'redux/actions/index';
 import PropTypes from 'prop-types';
 import Conversation from './Conversation';
 
 import './styles/chat.scss';
 
 const Chat = ({ forceUpdateMain }) => {
-  const dispatch = useDispatch();
   const [chatWith, setChatWith] = useState('');
   window.onhashchange = () => {
     forceUpdateMain();
   };
+
   return (
     <>
       <div className="chat">
@@ -22,7 +20,6 @@ const Chat = ({ forceUpdateMain }) => {
           className="chat__all"
           onClick={() => {
             setChatWith('all');
-            dispatch(ResetMessages());
             window.location.hash += '/#all';
           }}
         >

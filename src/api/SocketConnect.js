@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignOut, SetUser } from 'redux/actions/index';
+import { SetUser } from 'redux/actions/index';
 import Start from 'components/mobile/start/Start';
 import Main from 'components/mobile/chan/Main';
 import isMobile from 'is-mobile';
@@ -8,16 +8,13 @@ import isMobile from 'is-mobile';
 const SocketConnect = () => {
   const ENDPOINT = process.env.REACT_APP_API;
   const dispatch = useDispatch();
-  const isLogged = useSelector((state) => state.isLogged);
   const socket = useSelector((state) => state.socket);
-  //   const userInfo = useSelector((state) => state.userInfo);
-
+  const isLogged = useSelector((state) => state.socket.connected);
   useEffect(() => {
     if (socket) {
       socket.on('error', (err) => {
         if (err) {
           localStorage.removeItem('token');
-          dispatch(SignOut());
         }
       });
       socket.on('connect', () => {});
@@ -32,7 +29,6 @@ const SocketConnect = () => {
 
       socket.on('connect_error', () => {
         localStorage.removeItem('token');
-        dispatch(SignOut());
       });
     }
   }, [ENDPOINT, dispatch, socket]);

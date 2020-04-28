@@ -1,8 +1,14 @@
-const messages = (state = [], action) => {
+const initialState = {
+  messages: [],
+  messagesLastId: '',
+};
+const messages = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_MESSAGES':
       return {
+        ...state,
         messages: action.messages,
+        messagesLastId: action.messagesLastId,
       };
     case 'RESET_MESSAGES':
       return {
@@ -16,12 +22,11 @@ const messages = (state = [], action) => {
     case 'ADD_MORE_MESSAGES':
       return {
         ...state,
-        messages: [action.moreMessages, ...state.messages],
+        messages: action.moreMessages.reverse().concat(state.messages),
+        messagesLastId: action.messagesLastId,
       };
     default:
-      return {
-        messages: [],
-      };
+      return state;
   }
 };
 

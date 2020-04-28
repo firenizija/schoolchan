@@ -1,55 +1,57 @@
-.createPostForm{
-    background-color: #EFF0F4;
-    border: 1px solid rgba(128, 128, 128, .4);
+.createPostForm {
+  background-color: #eff0f4;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 10px;
+  position: fixed;
+  width: 95%;
+  top: 10%;
+  left: 2.5%;
+  &__handle {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 0.8em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+  }
+  &__closeButton {
+    border: none;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+  }
+  &__formIco {
+    margin-right: 0.5em;
+  }
+  &__handleTitle {
+    font-size: 1.2em;
+  }
+  &__submit {
+    background-color: #2979ff;
+    font-weight: 700;
+    color: white;
+    padding: 0.8em 0;
+    width: 40%;
+    border-radius: 20px;
+    margin: 0 0 1em auto;
+  }
+  &__postBody {
     border-radius: 10px;
-    position: fixed;
-    width: 95%;
-    top:10%;
-    left: 2.5%;
-    &__handle{
-        display: flex;
-        justify-content: space-between;
-        padding: 1em .8em;
-        border-bottom: 1px solid rgba(128, 128, 128, .4);
-    }
-    &__closeButton{
-        border:none;
-        background-color: transparent;
-    }
-    &__form{
-        display: flex;
-        flex-direction: column;
-        padding: 0 2em;
-    }
-    &__formIco{
-        margin-right: .5em;
-    }
-    &__handleTitle{
-        font-size: 1.2em;
-    }
-    &__submit{
-        background-color: #2979FF;
-        font-weight: 700;
-        color:white;
-        padding: .8em 0;
-        width: 40%;
-        border-radius: 20px;
-        margin:0 0 1em auto;
-    }
-    &__postBody{
-        border-radius: 10px;
-        padding:1em;
-        resize: none;
-    }
-    &__label{
-        font-weight: 700;
-        font-size: 1.2em;
-        margin: 1em 0;
-    }
-    &__imageButton{
-        display: none;
-    }
-    &__labelButtonStyle{
-        width: 50%;
-    }
+    padding: 1em;
+    resize: none;
+  }
+  &__label {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 1em 0;
+  }
+  &__imageButton {
+    display: none;
+  }
+  &__labelButtonStyle {
+    width: 50%;
+  }
 }
