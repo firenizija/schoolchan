@@ -13,11 +13,13 @@ import './styles/post.scss';
 const Post = ({ post }) => {
   const socket = useSelector((state) => state.socket);
   const [commentsLength, setCommentsLength] = useState(0);
+  const {
+    comments, image, body, createdAt, username, _id, like, dislike,
+  } = post;
+
+  const [reaction, setReaction] = useState({ like, dislike });
 
   const forceUpdate = useForceUpdate();
-  const {
-    comments, image, body, createdAt, username, _id,
-  } = post;
   useEffect(() => {
     try {
       setCommentsLength(comments.length);
@@ -36,6 +38,40 @@ const Post = ({ post }) => {
     });
   }, [comments, socket, _id, forceUpdate]);
 
+  useEffect(() => {
+    socket.on('newReactionAdd', ({ postId, type, usernameLike }) => {
+      console.log({ [type]: [type].length });
+      if (postId === _id) {
+        if (type === 'like') {
+          setReaction({ ...reaction, like: usernameLike });
+          // like.push(usernameLike);
+        } else setReaction({ ...reaction, dislike: usernameLike });
+      }
+    });
+    socket.on('newReactionSub', ({ postId, type, usernameLike }) => {
+      console.log({ ...reaction, [type]: [type].length });
+      if (postId === _id) {
+        if (type === 'like') {
+          const index = like.indexOf(usernameLike);
+          like.splice(index, 1);
+        } else {
+          const index = dislike.indexOf(usernameLike);
+          dislike.splice(index, 1);
+        }
+        setReaction({ ...reaction, [type]: [type].length });
+      }
+    });
+    // console.log(like);
+  }, []);
+
+  const handleReaction = (type) => {
+    const reactionData = {
+      postId: _id,
+      type,
+    };
+    socket.emit('reaction', reactionData);
+  };
+
   return (
     <li className="post">
       <img src={racoonMale} alt="sex" className="post__sex" />
@@ -45,10 +81,10 @@ const Post = ({ post }) => {
         <div className="post__body">{body}</div>
         {image ? <img className="post__image" src={image.medium} alt="" /> : null}
         <div className="post__buttons">
-          <button type="button" className="post__like">
+          <button type="button" className="post__like" onClick={() => handleReaction('like')}>
             +1
           </button>
-          <button type="button" className="post__dislike">
+          <button type="button" className="post__dislike" onClick={() => handleReaction('dislike')}>
             -1
           </button>
           <button
@@ -70,9 +106,9 @@ const Post = ({ post }) => {
         <hr className="post__hr" />
         <div>
           <div className="post__votes">
-            <span className="post__reactions">13</span>
+            <span className="post__reactions">{reaction.like.length}</span>
             <span>&nbsp;szopów jest za, a&nbsp;</span>
-            <span className="post__reactions">5</span>
+            <span className="post__reactions">{reaction.dislike.length}</span>
             <span>&nbsp;przeciw</span>
           </div>
           <ul className="post__comments">
