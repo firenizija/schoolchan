@@ -1,32 +1,35 @@
-.messageForm{
-    width: 95%;
-    display: flex;
-    position: relative;
-    // bottom: 1em;
-    margin:1em 0;
-    justify-content: center;
-    align-items: flex-end;
-    border: 0.5px solid gray;
-    border-radius: 20px;
-    padding: 5px 10px;
-    background-color: #fff;
-    &__textarea{
-        margin:0 10px;
-        width:80%;
-        max-height: 6em;
-        align-self: center;
-        resize: none;
-        border:none;
-        background: transparent;
+.messageForm {
+  width: 95%;
+  display: flex;
+  position: relative;
+  // bottom: 1em;
+  margin: 1em 0;
+  justify-content: center;
+  align-items: flex-end;
+  border: 0.5px solid gray;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #fff;
+  &__sendImageInput {
+    display: none;
+  }
+  &__textarea {
+    margin: 0 10px;
+    width: 80%;
+    max-height: 6em;
+    align-self: center;
+    resize: none;
+    border: none;
+    background: transparent;
+  }
+  &__sendImageButton {
+    img {
+      height: 2.2em;
     }
-    &__sendImageButton{
-        img{
-            height: 2.2em;
-        }
+  }
+  &__sendMessageButton {
+    img {
+      height: 2.2em;
     }
-    &__sendMessageButton{
-        img{
-            height: 2.2em;
-        }
-    }
+  }
 }

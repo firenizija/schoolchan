@@ -18,7 +18,8 @@
       {
         "extensions": [".js"]
       }
-    ]
+    ],
+    "no-underscore-dangle": "off"
   },
   "settings": {
     "import/resolver": {

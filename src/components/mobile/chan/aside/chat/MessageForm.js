@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import uploadImage from 'api/uploadImage';
 import autosize from 'autosize';
 import sendMessage from 'svg/sendMessage.svg';
 import imageIcon from 'svg/image_icon.svg';
@@ -10,30 +11,43 @@ const MessageForm = () => {
   const socket = useSelector((state) => state.socket);
   const [messageText, setMessageText] = useState('');
   const [messageImage, setMessageImage] = useState('');
+  const [imageStatus, setImageStatus] = useState('BEFORE');
+  const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
 
-  autosize(document.querySelector('.messageForm__textarea'));
+  autosize(textareaRef.current);
 
   const handleFocus = () => {
     const bottom = document.querySelector('#bottom');
     bottom.scrollIntoView();
   };
-
+  const SendMessage = () => {
+    if (imageStatus === 'DURING') {
+      const messageObj = { messageText, messageImage };
+      socket.emit('sendMessage', messageObj);
+    }
+  };
   const handleClickSend = (e) => {
     e.preventDefault();
-    const messageObj = { messageText, messageImage };
-    socket.emit('sendMessage', messageObj);
+    SendMessage();
     setMessageText('');
+    setMessageImage('');
   };
+
   return (
     <div className="messageForm">
-      <button
-        type="button"
-        className="messageForm__sendImageButton"
-        onClick={() => setMessageImage('null')}
-      >
+      <label className="messageForm__sendImageButton" htmlFor="file">
+        <input
+          ref={fileInputRef}
+          className="messageForm__sendImageInput"
+          type="file"
+          id="file"
+          onChange={() => uploadImage(fileInputRef, setMessageImage, setImageStatus)}
+        />
         <img src={imageIcon} alt="" />
-      </button>
+      </label>
       <textarea
+        ref={textareaRef}
         className="messageForm__textarea"
         rows="1"
         wrap="hard"

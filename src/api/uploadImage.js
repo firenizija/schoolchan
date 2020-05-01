@@ -1,4 +1,11 @@
-const uploadImage = (e) => {
+const imageStatus = {
+  before: 'BEFORE',
+  during: 'DURING',
+  done: 'DONE',
+};
+const uploadImage = (input, setImage, setImageStatus) => {
+  setImageStatus(imageStatus.during);
+
   const sendImage = (base64) => {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -15,20 +22,23 @@ const uploadImage = (e) => {
     };
 
     fetch('https://api.imgbb.com/1/upload', requestOptions)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.data);
-        return { large: res.data.image.url, mini: res.data.thumb.url, medium: res.data.medium.url };
+      .then((response) => response.json())
+      .then((result) => {
+        setImageStatus(imageStatus.done);
+        return setImage({
+          large: result.data.image.url,
+          mini: result.data.thumb.url,
+          // medium: result.data.medium.url,
+        });
       })
       .catch((error) => console.log('error', error));
   };
-
-  const file = e.target.files[0];
+  const file = input.current.files[0];
   const reader = new FileReader();
 
   reader.onloadend = () => {
     const base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-    return sendImage(base64result);
+    sendImage(base64result);
   };
 
   if (file) {

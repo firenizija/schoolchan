@@ -40,16 +40,13 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     socket.on('newReactionAdd', ({ postId, type, usernameLike }) => {
-      console.log({ [type]: [type].length });
       if (postId === _id) {
         if (type === 'like') {
           setReaction({ ...reaction, like: usernameLike });
-          // like.push(usernameLike);
         } else setReaction({ ...reaction, dislike: usernameLike });
       }
     });
     socket.on('newReactionSub', ({ postId, type, usernameLike }) => {
-      console.log({ ...reaction, [type]: [type].length });
       if (postId === _id) {
         if (type === 'like') {
           const index = like.indexOf(usernameLike);
@@ -61,7 +58,6 @@ const Post = ({ post }) => {
         setReaction({ ...reaction, [type]: [type].length });
       }
     });
-    // console.log(like);
   }, []);
 
   const handleReaction = (type) => {
@@ -79,7 +75,7 @@ const Post = ({ post }) => {
         <div className="post__username">{username}</div>
         <div className="post__postDate">{whenPosted(createdAt)}</div>
         <div className="post__body">{body}</div>
-        {image ? <img className="post__image" src={image.medium} alt="" /> : null}
+        {image && <img className="post__image" src={image.large} alt="" />}
         <div className="post__buttons">
           <button type="button" className="post__like" onClick={() => handleReaction('like')}>
             +1

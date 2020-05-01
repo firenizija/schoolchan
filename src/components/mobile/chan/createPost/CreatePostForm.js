@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import autosize from 'autosize';
+import uploadImage from 'api/uploadImage';
 
 import closeIco from 'svg/closeIco.svg';
 import formIco from 'svg/formIco.svg';
 import uploadImageIco from 'svg/uploadImage.svg';
 import uploadImageDoneIco from 'svg/uploadImageDone.svg';
-// import uploadImageLoadingIco from 'svg/uploadImageLoading.svg';
+import uploadImageLoadingIco from 'svg/uploadImageLoading.svg';
 
 import './styles/createPostForm.scss';
 
 const CreatePostForm = ({ setCreatePostFrom }) => {
   const [body, setBody] = useState('');
   const [image, setImage] = useState('');
+  const [imageStatus, setImageStatus] = useState('BEFORE');
   const socket = useSelector((state) => state.socket);
+  const fileInputRef = useRef(null);
 
   const sendPost = (e) => {
     e.preventDefault();
@@ -26,44 +28,18 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
     }
   };
 
-  const uploadImage = () => {
-    const sendImage = (base64) => {
-      const myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-
-      const urlencoded = new URLSearchParams();
-      urlencoded.append('key', process.env.REACT_APP_SECRET);
-      urlencoded.append('image', base64);
-
-      const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: urlencoded,
-        redirect: 'follow',
-      };
-
-      fetch('https://api.imgbb.com/1/upload', requestOptions)
-        .then((response) => response.json())
-        .then((result) => setImage({
-          large: result.data.image.url,
-          mini: result.data.thumb.url,
-          medium: result.data.medium.url,
-        }))
-        .catch((error) => console.log('error', error));
-    };
-    const file = document.getElementById('file').files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      const base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-      sendImage(base64result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
+  const imageStatusIMG = () => {
+    switch (imageStatus) {
+      case 'BEFORE':
+        return uploadImageIco;
+      case 'DURING':
+        return uploadImageLoadingIco;
+      case 'DONE':
+        return uploadImageDoneIco;
+      default:
+        return uploadImageIco;
     }
   };
-  autosize(document.querySelector('textarea'));
 
   return (
     <Draggable axis="y" handle=".createPostForm__handle">
@@ -89,24 +65,21 @@ const CreatePostForm = ({ setCreatePostFrom }) => {
             name="body"
             className="createPostForm__postBody"
             rows="8"
-            placeholder="Nie ma to jak koronawirus x_x"
+            placeholder="Napisz coś..."
             onChange={(e) => setBody(e.target.value)}
             value={body}
           />
           <div className="createPostForm__label">Obraz:</div>
-          <label className="createPostForm__labelButtonStyle" htmlFor="image">
-            <img
-              src={image === '' ? uploadImageIco : uploadImageDoneIco}
-              alt="upload"
-              className="createPostForm__uploadImg"
-            />
+          <label className="createPostForm__labelButtonStyle" htmlFor="file">
+            <img src={imageStatusIMG()} alt="upload" className="createPostForm__uploadImg" />
             <input
+              ref={fileInputRef}
               className="createPostForm__imageButton"
               name="image"
               type="file"
               accept="image/x-png,image/jpeg"
               id="file"
-              onChange={() => uploadImage()}
+              onChange={() => uploadImage(fileInputRef, setImage, setImageStatus)}
             />
           </label>
           <button type="submit" className="createPostForm__submit" onClick={(e) => sendPost(e)}>

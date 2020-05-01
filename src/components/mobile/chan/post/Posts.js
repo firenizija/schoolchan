@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, connect } from 'react-redux';
@@ -10,6 +9,7 @@ import './styles/posts.scss';
 const Posts = ({ postType, posts }) => {
   let waitForMorePosts = false;
   const socket = useSelector((state) => state.socket);
+
   useScrollPosition(
     ({ currPos }) => {
       const scrollProgress = document.body.offsetHeight - window.innerHeight + currPos.y;
@@ -23,6 +23,7 @@ const Posts = ({ postType, posts }) => {
     false,
     300,
   );
+
   return (
     <ul className="posts">
       {posts[postType].map((post) => (

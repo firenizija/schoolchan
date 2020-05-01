@@ -6,7 +6,6 @@ import backIco from 'svg/backIco.svg';
 import useForceUpdate from 'use-force-update';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
-// import uploadImage from 'api/uploadImage';
 
 import './styles/comments.scss';
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, connect } from 'react-redux';
 import Message from './Message';
@@ -12,13 +12,15 @@ const Messages = ({ messages }) => {
   const socket = useSelector((state) => state.socket);
   const username = useSelector((state) => state.userInfo.username);
   const [autoScroll, setAutoScroll] = useState(true);
+  const bottomDiv = useRef(null);
+  const messagesScrollRef = useRef(null);
+  const messagesLoadMoreButtonRef = useRef(null);
 
   const scrollToBottom = (speed) => {
-    const bottom = document.querySelector('#bottom');
     if (speed === 'smooth') {
-      bottom.scrollIntoView({ behavior: 'smooth' });
+      bottomDiv.current.scrollIntoView({ behavior: 'smooth' });
     } else if (speed === 'fast') {
-      bottom.scrollIntoView();
+      bottomDiv.current.scrollIntoView();
     }
   };
 
@@ -26,10 +28,12 @@ const Messages = ({ messages }) => {
     isWaitingForMessages = true;
     socket.emit('getMoreMessages', messages.messagesLastId);
   };
-
   useEffect(() => {
-    const messagesBlock = document.querySelector('.messages__scroll');
-    const button = document.querySelector('.messages__loadMoreButton');
+    scrollToBottom('fast');
+  }, []);
+  useEffect(() => {
+    const messagesBlock = messagesScrollRef.current;
+    const button = messagesLoadMoreButtonRef.current;
     const loadedMessages = document.querySelectorAll('.message');
     if (messagesBlock && loadedMessages.length > 5) {
       let getMessagesHeight;
@@ -48,7 +52,7 @@ const Messages = ({ messages }) => {
 
   useEffect(() => {
     const newMessage = document.querySelectorAll('.message');
-    const { scrollHeight, scrollTop, offsetHeight } = document.querySelector('.messages__scroll');
+    const { scrollHeight, scrollTop, offsetHeight } = messagesScrollRef.current;
     if (newMessage.length > 0) {
       const msgHeight = scrollHeight - scrollTop - offsetHeight;
       const scrollHeightMessages = msgHeight - newMessage[newMessage.length - 1].offsetHeight - 24;
@@ -65,9 +69,10 @@ const Messages = ({ messages }) => {
 
   return (
     <div className="messages">
-      <div className="messages__scroll">
+      <div ref={messagesScrollRef} className="messages__scroll">
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
+          ref={messagesLoadMoreButtonRef}
           type="button"
           className="messages__loadMoreButton"
           onClick={() => loadMoreMessages()}
@@ -75,7 +80,7 @@ const Messages = ({ messages }) => {
         {messages.messages.map((message) => (
           <Message key={message._id} message={message} isMy={message.username === username} />
         ))}
-        <div id="bottom" />
+        <div ref={bottomDiv} id="bottom" />
       </div>
     </div>
   );
