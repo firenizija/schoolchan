@@ -22,16 +22,16 @@ const MessageForm = () => {
     bottom.scrollIntoView();
   };
   const SendMessage = () => {
-    if (imageStatus === 'DURING') {
+    if (imageStatus !== 'DURING') {
       const messageObj = { messageText, messageImage };
       socket.emit('sendMessage', messageObj);
+      setMessageText('');
+      setMessageImage('');
     }
   };
   const handleClickSend = (e) => {
     e.preventDefault();
     SendMessage();
-    setMessageText('');
-    setMessageImage('');
   };
 
   return (
